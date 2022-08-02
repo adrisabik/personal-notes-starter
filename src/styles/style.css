@@ -39,6 +39,9 @@ input::placeholder, textarea::placeholder {
   color: white;
 }
 
+.note-search {
+  width: 400px;
+}
 
 .note-app__body {
   max-width: 1000px;
