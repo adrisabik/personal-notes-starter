@@ -2,7 +2,6 @@ import React from 'react'
 import { getInitialData } from '../utils/index';
 import NoteHeader from './NoteHeader';
 import NoteBody from './NoteBody';
-import NotesList from './NotesList';
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -12,6 +11,8 @@ class NoteApp extends React.Component {
     }
 
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
+    this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
+    this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this);
   }
 
   onAddNoteHandler({ title, body }) {
@@ -31,12 +32,32 @@ class NoteApp extends React.Component {
     })
   }
 
+  onDeleteNoteHandler(id) {
+    const notes = this.state.notes.filter(note => note.id !== id);
+    this.setState({ notes });
+  }
+
+  onArchiveNoteHandler(id) {
+    const notes = this.state.notes.map((note) => 
+      note.id === id ? { ...note, archived: !note.archived } : note
+    );
+    this.setState({ notes })
+  }
+
+  onSearchNoteHandler(search) {
+    this.setState((prevState) => {
+      return {
+          ...prevState,
+          search: search,
+      };
+    });
+  }
+
   render() {
     return(
       <div>
-        <NoteHeader />
-        <NoteBody addNote={this.onAddNoteHandler} />
-        <NotesList notes={this.state.notes} />
+        <NoteHeader searchNote={this.onSearchNoteHandler} />
+        <NoteBody addNote={this.onAddNoteHandler} notes={this.state.notes} onDelete={this.onDeleteNoteHandler} onArchive={this.onArchiveNoteHandler} />
       </div>
     )
   }
