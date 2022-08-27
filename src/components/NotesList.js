@@ -1,18 +1,29 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 
-function NotesList({ notes, onDelete, onArchive }) {
+function NotesList({ notes, onDelete, onArchive, dataSearch }) {
   let noteArchived = [];
   let noteNotArchived = [];
 
-  notes.map((note) => {
-    if(note.archived) {
-      noteArchived.push(note);
-    }
-    else {
-      noteNotArchived.push(note);
-    }
-  })
+  if(dataSearch.length !== 0){
+    dataSearch.map((note) => {
+      if(note.archived) {
+        noteArchived.push(note);
+      }
+      else {
+        noteNotArchived.push(note);
+      }
+    })
+  } else{
+    notes.map((note) => {
+      if(note.archived) {
+        noteArchived.push(note);
+      }
+      else {
+        noteNotArchived.push(note);
+      }
+    })
+  }
 
   return (  
     <>

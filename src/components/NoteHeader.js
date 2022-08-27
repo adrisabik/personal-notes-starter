@@ -20,8 +20,7 @@ class NoteHeader extends React.Component {
   }
 
   onSearchSubmitEventHandler(event) {
-    event.preventDefault();
-    this.props.searchNote(this.state);
+    this.props.searchNote(event);
   }
 
   render(){

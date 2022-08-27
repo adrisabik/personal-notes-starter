@@ -44,12 +44,12 @@ class NoteApp extends React.Component {
     this.setState({ notes })
   }
 
-  onSearchNoteHandler(search) {
+  onSearchNoteHandler= (search) => {
     this.setState((prevState) => {
-      return {
-          ...prevState,
-          search: search,
-      };
+        return {
+            ...prevState,
+            search: search,
+        };
     });
   }
 
@@ -57,7 +57,21 @@ class NoteApp extends React.Component {
     return(
       <div>
         <NoteHeader searchNote={this.onSearchNoteHandler} />
-        <NoteBody addNote={this.onAddNoteHandler} notes={this.state.notes} onDelete={this.onDeleteNoteHandler} onArchive={this.onArchiveNoteHandler} />
+        <NoteBody 
+          addNote={this.onAddNoteHandler} 
+          notes={this.state.notes} 
+          onDelete={this.onDeleteNoteHandler} 
+          onArchive={this.onArchiveNoteHandler} 
+          dataSearch={
+            this.state.search
+                ? this.state.notes.filter((note) =>
+                    note.title
+                        .toLowerCase()
+                        .includes(this.state.search.toLowerCase())
+                )
+                : this.state.notes
+        }
+        />
       </div>
     )
   }
