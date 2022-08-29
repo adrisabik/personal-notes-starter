@@ -2,6 +2,7 @@ import React from 'react'
 import { getInitialData } from '../utils/index';
 import NoteHeader from './NoteHeader';
 import NoteBody from './NoteBody';
+import NoteInput from './NoteInput';
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -57,8 +58,8 @@ class NoteApp extends React.Component {
     return(
       <div>
         <NoteHeader searchNote={this.onSearchNoteHandler} />
+        <NoteInput addNote={this.onAddNoteHandler}  />
         <NoteBody 
-          addNote={this.onAddNoteHandler} 
           notes={this.state.notes} 
           onDelete={this.onDeleteNoteHandler} 
           onArchive={this.onArchiveNoteHandler} 
